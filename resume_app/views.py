@@ -14,5 +14,5 @@ class ResumeCreateView(CreateView):
 
 class ResumeListView(ListView):
     model = Resume
-    template_name = 'resume_app/resume_list.html'  # Создайте шаблон для отображения списка резюме
+    template_name = 'resume_app/resume_list.html'
     context_object_name = 'resumes'
