@@ -1,0 +1,86 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Site{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+<header class="theme-header">
+    <h1>{% block header %}Online CV Builder{% endblock %}</h1>
+    <nav>
+        <ul>
+            <li><a href="{% url 'create_resume' %}">Create CV</a></li>
+            <li><a href="{% url 'resume_list' %}">CV list</a></li>
+        </ul>
+    </nav>
+    <div class="theme-toggle">
+        <label class="switch">
+            <input type="checkbox" id="themeToggle">
+            <span class="slider"></span>
+        </label>
+    </div>
+</header>
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<footer>
+    <p>&copy; Elshan Gurbanov | <a href="https://t.me/Flauler" target="_blank">Telegram</a></p>
+</footer>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const themeToggle = document.getElementById('themeToggle');
+        const formInputs = document.querySelectorAll('form input, form textarea');
+        const resumeBlocks = document.querySelectorAll('.resume-block');
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            themeToggle.checked = true;
+            applyDarkTheme();
+        }
+
+        themeToggle.addEventListener('change', function () {
+            if (this.checked) {
+                applyDarkTheme();
+                localStorage.setItem('theme', 'dark');
+            } else {
+                resetTheme();
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        function applyDarkTheme() {
+            formInputs.forEach(function (input) {
+                input.style.backgroundColor = 'rgba(35,35,35,0.87)';
+                input.style.color = '#ffffff';
+            });
+
+            resumeBlocks.forEach(function (block) {
+                block.style.backgroundColor = 'rgba(19,19,19,0.58)';
+                block.style.color = '#ffffff';
+            });
+        }
+
+        function resetTheme() {
+            formInputs.forEach(function (input) {
+                input.style.backgroundColor = '#ffffff';
+                input.style.color = '#000000';
+            });
+
+            resumeBlocks.forEach(function (block) {
+                block.style.backgroundColor = '#ffffff';
+                block.style.color = '#000000';
+            });
+        }
+    });
+
+
+</script>
+</body>
+</html>
+</html>

@@ -1,0 +1,24 @@
+{% extends 'resume_app/base.html' %}
+
+{% block title %}Resume List{% endblock %}
+
+{% block content %}
+  <h2>All Resumes</h2>
+  <div class="resume-list">
+    {% for resume in resumes %}
+      <div class="resume-block">
+        <h3>{{ resume.full_name }}</h3><hr>
+        <p><strong>Email:</strong> {{ resume.email }}</p><hr>
+        <p><strong>Phone:</strong> {{ resume.phone_number }}</p><hr>
+        <p><strong>Education:</strong> {{ resume.education }}</p><hr>
+        <p><strong>Experience:</strong> {{ resume.experience }}</p><hr>
+        <p><strong>Skills:</strong> {{ resume.skills }}</p><hr>
+        <p><strong>Additional Information:</strong> {{ resume.additional_information }}</p>
+      </div>
+      {% if not forloop.last %}
+        <hr class="resume-divider">
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endblock %}
+

@@ -1,0 +1,14 @@
+{% extends 'resume_app/base.html' %}
+
+{% block content %}
+
+    <h2 class="create-resume-title">Create Resume</h2>
+
+    <form method="post" enctype="multipart/form-data" style="color: black;">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}
